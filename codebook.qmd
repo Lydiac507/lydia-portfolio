@@ -1,0 +1,63 @@
+---
+title: "Website Traffic Analytics Codebook and Report"
+format: html
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## Purpose
+
+This reproducible report documents the web traffic analytics framework for Lydia Chen's professional portfolio website.
+
+## Research Question
+
+Which traffic sources and pages are most effective at attracting, engaging, and converting prospective audiences?
+
+## Data Dictionary
+
+| Variable | Definition | Marketing Interpretation |
+|---|---|---|
+| date | Event or session date | Supports trend analysis |
+| source_medium | Traffic source and medium | Identifies acquisition channel |
+| page_title | Visited page title | Shows content interest |
+| sessions | Number of sessions | Measures traffic volume |
+| engaged_sessions | Sessions meeting engagement criteria | Measures quality of visits |
+| conversions | Completed target events | Measures business outcome |
+
+## Sample R Analysis Structure
+
+```{r}
+# Replace sample data with exported GA4 data.
+library(tidyverse)
+
+traffic <- tibble::tribble(
+  ~source_medium, ~sessions, ~engaged_sessions, ~conversions,
+  "google / organic", 420, 260, 24,
+  "linkedin / referral", 180, 128, 18,
+  "instagram / social", 260, 150, 12,
+  "direct / none", 210, 110, 8
+)
+
+traffic_summary <- traffic |>
+  mutate(
+    engagement_rate = engaged_sessions / sessions,
+    conversion_rate = conversions / sessions
+  ) |>
+  arrange(desc(conversion_rate))
+
+traffic_summary
+```
+
+## Interpretation Template
+
+- Best channel by traffic volume: identify the largest session source.
+- Best channel by quality: compare engagement rate and conversion rate.
+- Optimization priority: improve CTAs and reduce conversion friction on high-traffic pages.
+
+## Limitations
+
+- GA4 attribution may not show the full customer journey.
+- Tracking accuracy should be validated before making budget decisions.
+- Small samples should be interpreted directionally.
